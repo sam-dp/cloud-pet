@@ -1,0 +1,27 @@
+/* components/Navbar.module.css */
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+  }
+  
+  .navLinks {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navLinks li {
+    margin-right: 20px;
+  }
+  
+  .navLinks a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .navLinks a:hover {
+    color: #f1c40f;  /* Yellow hover effect */
+  }
+  
