@@ -8,6 +8,11 @@ declare module "next-auth" {
       id: string;
       email: string;
     };
+    accessToken?: string; // Add accessToken to the session
+  }
+
+  interface JWT {
+    accessToken?: string; // Add accessToken to JWT
   }
 }
 
@@ -20,7 +25,11 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
+      if (account) {
+        token.accessToken = account.access_token; // Store Cognito's access token
+      }
+      
       if (user) {
         token.id = user.id;
       }
