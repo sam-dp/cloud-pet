@@ -1,7 +1,7 @@
 import { SessionProvider } from "next-auth/react";  // Import SessionProvider for authentication
 import Navbar from "../components/Navbar/Navbar";
 import { AppProps } from 'next/app';
-//import "../styles/globals.css";  // Global styles (if any)
+import "../styles/globals.css"; 
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
