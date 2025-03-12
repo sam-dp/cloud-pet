@@ -8,7 +8,7 @@ export default function Home() {
   if (session) {
     return (
       <div>
-        <p>Welcome, {session.user?.email}!</p>
+        <p>Welcome, {session.user?.username}!</p>
         <a href="/dashboard">Go to Dashboard</a>
         {/* <button onClick={() => signOut()}>Sign Outtttt</button> */}
       </div>
