@@ -31,44 +31,59 @@ export default function Dashboard() {
         }
     }, [session, status]);
 
-  const updateStats = async (petId: string, statType: string, userId: string) => {
-    try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-        if (!apiUrl) {
-            setError("API Gateway URL not configured.");
-            return;
-        }
-        let updateObject = {};
+const updateStats = async (petId: string, statType: string) => {
+  if (!session?.user?.id) {
+    console.warn("Session or user ID not available.");
+    setError("User session is invalid. Please log in.");
+    return;
+}
+  try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      if (!apiUrl) {
+          setError("API Gateway URL not configured.");
+          return;
+      }
 
-        if (statType === "feed"){
-            updateObject = {hunger: "10"}
-        } else if (statType === "clean"){
-            updateObject = {hygiene: "10"}
-        } else if (statType === "rest"){
-            updateObject = {sleep: "10"}
-        }
+      // Find the selected pet
+      const selectedPet = pets.find((pet) => pet.petId === petId);
 
-        const response = await fetch(`${apiUrl}/update_status`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                userId: userId,
-                petId: petId,
-                update: updateObject,
-            }),
-        });
+      if (!selectedPet) {
+          setError(`Pet with ID ${petId} not found.`);
+          return;
+      }
 
-        if (!response.ok) {
-            throw new Error('Failed to update stats');
-        }
+      // Find the status object matching the statType
+      const status = selectedPet.statuses.find((s) => s.type === statType);
 
-        const queryParams = new URLSearchParams({ userId: userId }).toString();
-        const data = await apiRequest(`fetch_user?${queryParams}`, "GET");
-        setPets(data.pets || []);
+      if (!status) {
+          setError(`Status ${statType} not found for pet ${petId}.`);
+          return;
+      }
 
-    } catch (err) {
-        setError(`Error updating ${statType}: ${String(err)}`);
-    }
+      const statusId = status.type; // Extract statusId (type)
+      const incrementValue = 10; 
+
+      const response = await fetch(`${apiUrl}/update_status`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              statusId: statusId,
+              petId: petId,
+              incrementValue: incrementValue,
+          }),
+      });
+
+      if (!response.ok) {
+          throw new Error('Failed to update stats');
+      }
+
+      const queryParams = new URLSearchParams({ userId: session.user.id }).toString();
+      const data = await apiRequest(`fetch_user?${queryParams}`, "GET");
+      setPets(data.pets || []);
+
+  } catch (err) {
+      setError(`Error updating ${statType}: ${String(err)}`);
+  }
 };
      
 
@@ -152,19 +167,19 @@ export default function Dashboard() {
                         <div className="mt-4 flex gap-4 justify-end">
                           <button
                             className="px-4 py-2 bg-green-500 text-white rounded"
-                            onClick={() => updateStats(pets[selectedPetIndex].petId, "feed", session.user.id)}
+                            onClick={() => updateStats(pets[selectedPetIndex].petId, "hunger")}
                           >
                             Feed
                           </button>
                           <button
                             className="px-4 py-2 bg-yellow-500 text-white rounded"
-                            onClick={() => updateStats(pets[selectedPetIndex].petId, "clean", session.user.id)}
+                            onClick={() => updateStats(pets[selectedPetIndex].petId, "hygiene")}
                           >
                             Clean
                           </button>
                           <button
                             className="px-4 py-2 bg-blue-500 text-white rounded"
-                            onClick={() => updateStats(pets[selectedPetIndex].petId, "rest", session.user.id)}
+                            onClick={() => updateStats(pets[selectedPetIndex].petId, "sleep")}
                            >
                             Rest
                           </button>
