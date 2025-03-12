@@ -86,7 +86,7 @@ export default function Dashboard() {
             const response = await fetch(`${apiUrl}/create_pet`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userId: session?.user.email, name: petName }),
+                body: JSON.stringify({ userId: session?.user.id, name: petName }),
             });
 
             if (!response.ok) {
