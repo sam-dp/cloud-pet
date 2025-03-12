@@ -26,7 +26,7 @@ export default function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <p>Welcome, {session?.user?.email}!</p>
-      <button onClick={() => signOut()}>Sign Out</button>
+      {/* <button onClick={() => signOut()}>Sign Outtttttt</button> */}
     </div>
   );
 }

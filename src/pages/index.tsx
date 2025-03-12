@@ -10,7 +10,7 @@ export default function Home() {
       <div>
         <p>Welcome, {session.user?.username}!</p>
         <a href="/dashboard">Go to Dashboard</a>
-        <button onClick={() => signOut()}>Sign Out</button>
+        {/* <button onClick={() => signOut()}>Sign Outtttt</button> */}
       </div>
     );
   }
