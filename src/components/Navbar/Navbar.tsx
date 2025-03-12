@@ -28,6 +28,11 @@ const Navbar = () => {
               Dashboard
             </Link>
           </li>
+          <li>
+            <Link href="/profile" className="text-white hover:underline">
+              Profile
+            </Link>
+          </li>
          {/* Profile Dropdown */}
          {session?.user ? (
             <li className="relative">
