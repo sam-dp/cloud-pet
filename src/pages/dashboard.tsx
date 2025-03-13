@@ -6,7 +6,7 @@ import { apiRequest } from "../utils/apiHelper";
 
 export default function Dashboard() {
     const { data: session, status } = useSession();
-    const [pets, setPets] = useState<{ petName: string; petId: string; statuses: { type: string; lastValue: string }[] }[]>([]);
+    const [pets, setPets] = useState<{ petName: string; petId: string; statuses: {  statusId: String; type: string; lastValue: string }[] }[]>([]);
     const [selectedPetIndex, setSelectedPetIndex] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [petName, setPetName] = useState("");
@@ -60,7 +60,7 @@ const updateStats = async (petId: string, statType: string) => {
           return;
       }
 
-      const statusId = status.type; // Extract statusId (type)
+      const statusId = status.statusId; // Extract statusId (type)
       const incrementValue = 10; 
 
       const response = await fetch(`${apiUrl}/update_status`, {
