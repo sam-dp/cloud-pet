@@ -65,17 +65,28 @@ const updateStats = async (petId: string, statType: string) => {
 
       const response = await fetch(`${apiUrl}/update_status`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            "Authorization": `Bearer ${session.accessToken}`,
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
               statusId: statusId,
               petId: petId,
-              incrementValue: incrementValue,
+              incrementValue: incrementValue
           }),
       });
 
       if (!response.ok) {
-          throw new Error('Failed to update stats');
-      }
+        // Read the response body to get more details
+        const errorText = await response.text();
+        console.error("Failed to update stats:", {
+            status: response.status,
+            statusText: response.statusText,
+            body: errorText,
+        });
+        throw new Error(`Failed to update stats: ${response.status} ${response.statusText} - ${errorText}`);
+    }
+
 
       const queryParams = new URLSearchParams({ userId: session.user.id }).toString();
       const data = await apiRequest(`fetch_user?${queryParams}`, "GET");
