@@ -36,14 +36,24 @@ pnpm dev
 ```
 
 ## Example Usage
+Example walkthrough of how Cloud Pet is used.
+
 ### Before Sign-In
+Users who don't have an active login session will have to log in through AWS Cognito.
+
 <img width="1280" alt="image" src="https://github.com/user-attachments/assets/37e8f712-6b88-44d8-855f-6f97bfad5726" />
 
 ### After Sign-In
+Users can view the pet dashboard after signing in (or creating an account).
+
 <img width="1280" alt="image" src="https://github.com/user-attachments/assets/fda3f736-7aef-44c8-b7b0-776a0292c8a7" />
 
 ### Dashboard Before Creating Pets
+Users can create and name pets from the dashboard if it is empty.
+
 <img width="1264" alt="image" src="https://github.com/user-attachments/assets/bc7d1a64-c232-4dc7-84c4-07a783e6b641" />
 
 ### After Creating Two Pets
+Users can feed, clean, and rest their pets using the appropriate buttons to keep pets happy (These statuses decrease over time). If a user has multiple pets, they can switch through them.
+
 <img width="1262" alt="image" src="https://github.com/user-attachments/assets/9a56f8a6-75a8-47c6-8ebb-638558dce766" />
