@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cloud Pet
+Cloud Pet is a virtual pet platform powered by the cloud that allows users to adopt and care for pets. Name your pet, and keep it fed, clean, and well-rested!
 
-## Getting Started
+## Local Setup
+The Cloud Pet client WebApp can be deployed and run locally, assuming the required AWS services and environment variables are configured.
 
-First, run the development server:
+### Environment Variables
+Before running, the environment variables must be set in a root `.env.local` file with the following secrets:
+
+```env
+COGNITO_CLIENT_ID=your-cognito-client-id
+COGNITO_CLIENT_SECRET=your-cognito-client-secret
+COGNITO_ISSUER=https://cognito-idp.{region}.amazonaws.com/{user-pool-id}
+NEXTAUTH_SECRET=your-secure-secret
+NEXTAUTH_URL=http://localhost:3000 # The deployed domain, this is default for local
+```
+
+### Node Modules
+Install the required node packages using `npm` or a similar package manager in the project directory. 
+
+```bash
+npm install
+# or
+pnpm install
+```
+
+### Running
+Run the project locally using `npm` or a similar tool.
+
+Open [http://localhost:3000](http://localhost:3000) (or whatever domain you used) with your browser to see the locally running client.
 
 ```bash
 npm run dev
 # or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Example Usage
+### Before Sign-In
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/37e8f712-6b88-44d8-855f-6f97bfad5726" />
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### After Sign-In
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/fda3f736-7aef-44c8-b7b0-776a0292c8a7" />
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Dashboard Before Creating Pets
+<img width="1264" alt="image" src="https://github.com/user-attachments/assets/bc7d1a64-c232-4dc7-84c4-07a783e6b641" />
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### After Creating Two Pets
+<img width="1262" alt="image" src="https://github.com/user-attachments/assets/9a56f8a6-75a8-47c6-8ebb-638558dce766" />
