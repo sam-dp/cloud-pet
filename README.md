@@ -1,6 +1,9 @@
 # Cloud Pet
 Cloud Pet is a virtual pet platform powered by the cloud that allows users to adopt and care for pets. Name your pet, and keep it fed, clean, and well-rested!
 
+## Documentation
+For more extensive detail on this project, see the [documentation](/documentation/Cloud%20Pet%20Design%20Doc.pdf).
+
 ## Local Setup
 The Cloud Pet client WebApp can be deployed and run locally, assuming the required AWS services and environment variables are configured.
 
